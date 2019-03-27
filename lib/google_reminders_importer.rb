@@ -1,8 +1,7 @@
 require "active_model"
 
 require "google_reminders_importer/google_reminder"
-require "google_reminders_importer/process_file"
-require "google_reminders_importer/reminders_file"
+require "google_reminders_importer/google_reminders_importer"
 require "google_reminders_importer/version"
 
 begin
@@ -12,9 +11,9 @@ end
 
 module GoogleRemindersImporter
   def self.import(reminders)
-    reminders_file = RemindersFile.new(reminders)
+    reminders_file = GoogleRemindersImporter.new(reminders)
     if reminders_file.valid?
-      ProcessFile.call(reminders_file)
+      reminders_file.process
     else
       raise InvalidRemindersFormat, import.errors.messages
     end

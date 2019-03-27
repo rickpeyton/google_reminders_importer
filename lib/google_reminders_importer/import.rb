@@ -1,7 +1,7 @@
 module GoogleRemindersImporter
-  class GoogleRemindersImporter
+  class Import
     include ActiveModel::Validations
-    
+
     def initialize(reminders)
     end
 

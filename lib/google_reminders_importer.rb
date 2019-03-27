@@ -8,6 +8,9 @@ end
 
 module GoogleRemindersImporter
   def self.import(reminders)
+    # Validate format of reminders file
+    # Process the reminders file
+    # Return a collection of GoogleReminder objects
     [GoogleReminder.new]
   end
 end

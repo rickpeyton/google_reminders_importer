@@ -2,6 +2,7 @@ require "active_model"
 
 require "google_reminders_importer/google_reminder"
 require "google_reminders_importer/import"
+require "google_reminders_importer/google_reminders_importer_error"
 require "google_reminders_importer/version"
 
 begin
@@ -15,7 +16,7 @@ module GoogleRemindersImporter
     if import.valid?
       import.process
     else
-      raise InvalidRemindersFormat, import.errors.messages
+      raise InvalidFormatError, import.errors.full_messages.join(".")
     end
   end
 end

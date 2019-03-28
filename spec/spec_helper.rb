@@ -1,6 +1,7 @@
 require "bundler/setup"
 require "google_reminders_importer"
 require "helpers"
+require "shoulda-matchers"
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
@@ -14,4 +15,11 @@ RSpec.configure do |config|
   end
 
   config.include Helpers
+end
+
+Shoulda::Matchers.configure do |config|
+  config.integrate do |with|
+    with.test_framework :rspec
+    with.library :active_model
+  end
 end

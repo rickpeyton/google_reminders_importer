@@ -9,8 +9,10 @@ RSpec.describe GoogleRemindersImporter do
     result = GoogleRemindersImporter.import(file_fixture("sample_export.html").read)
 
     expect(result.first).to be_a GoogleRemindersImporter::GoogleReminder
+    expect(result.size).to eq 7
+    expect(result.last.title).to eq "http://lifehac.kr/6TveCpO"
   end
-  
+
   it "raises an exception when reminders is not a valid reminders file" do
     expect { GoogleRemindersImporter.import("invalid") }
       .to raise_error(

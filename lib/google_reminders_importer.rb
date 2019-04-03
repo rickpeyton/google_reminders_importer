@@ -1,4 +1,5 @@
 require "active_model"
+require "nokogiri"
 
 require "google_reminders_importer/google_reminder"
 require "google_reminders_importer/import"
@@ -7,16 +8,15 @@ require "google_reminders_importer/version"
 
 begin
   require "pry"
-rescue LoadError
+rescue LoadError # rubocop:disable Lint/HandleExceptions:
 end
 
 module GoogleRemindersImporter
   def self.import(reminders)
     import = Import.new(reminders)
-    if import.valid?
-      import.process
-    else
-      raise InvalidFormatError, import.errors.full_messages.join(".")
-    end
+
+    raise InvalidFormatError, import.errors.full_messages.join(".") unless import.valid?
+
+    import.process
   end
 end
